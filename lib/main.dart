@@ -9,6 +9,7 @@ import 'package:shop/pages/products_page.dart';
 import 'package:shop/utils/app_routes.dart';
 import 'models/cart.dart';
 import 'pages/product_overview_page.dart';
+import './pages/product_form_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
           AppRoutes.CART: (context) => const CartPage(),
           AppRoutes.ORDERS: (context) => const OrdersPage(),
           AppRoutes.PRODUCTS: (context) => const ProductsPage(),
+          AppRoutes.PRODUCT_FORM: (context) => const ProductFormPage(),
         },
       ),
     );

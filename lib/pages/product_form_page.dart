@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -16,7 +18,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
   final _imageUrlFocus = FocusNode();
   final _imageUrlControler = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  final _formDate = Map<String, Object>();
+  final _formDate = <String, Object>{};
 
   @override
   void initState() {
@@ -37,7 +39,20 @@ class _ProductFormPageState extends State<ProductFormPage> {
     setState(() {});
   }
 
+  bool isValidImageUrl(String url) {
+    bool isValidUrl = Uri.tryParse(url)?.hasAbsolutePath ?? false;
+    bool endsWithFile = url.toLowerCase().endsWith('.png') ||
+        url.toLowerCase().endsWith('.jpg') ||
+        url.toLowerCase().endsWith('.jpeg');
+    return isValidUrl && endsWithFile;
+  }
+
   void _submitForm() {
+    final isValid = _formKey.currentState?.validate() ?? false;
+
+    if (!isValid) {
+      return;
+    }
     _formKey.currentState?.save();
     final newProduct = Product(
       id: Random().nextDouble().toString(),
@@ -56,7 +71,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
         actions: [
           IconButton(
             onPressed: _submitForm,
-            icon: Icon(Icons.save),
+            icon: const Icon(Icons.save),
           )
         ],
       ),
@@ -73,6 +88,17 @@ class _ProductFormPageState extends State<ProductFormPage> {
                   FocusScope.of(context).requestFocus(_priceFocus);
                 },
                 onSaved: (name) => _formDate['name'] = name ?? '',
+                validator: (_name) {
+                  final name = _name ?? '';
+
+                  if (name.trim().isEmpty) {
+                    return 'name is required.';
+                  }
+                  if (name.trim().length < 3) {
+                    return 'A minimum of 3 letters is required';
+                  }
+                  return null;
+                },
               ),
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Price'),
@@ -86,6 +112,15 @@ class _ProductFormPageState extends State<ProductFormPage> {
                 },
                 onSaved: (price) =>
                     _formDate['price'] = double.parse(price ?? '0'),
+                validator: (_price) {
+                  final priceString = _price ?? '-1';
+                  final price = double.tryParse(priceString) ?? -1;
+
+                  if (price <= 0) {
+                    return 'Provide a valid price.';
+                  }
+                  return null;
+                },
               ),
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Description'),
@@ -95,6 +130,17 @@ class _ProductFormPageState extends State<ProductFormPage> {
                 maxLines: 3,
                 onSaved: (description) =>
                     _formDate['description'] = description ?? '',
+                validator: (_description) {
+                  final description = _description ?? '';
+
+                  if (description.trim().isEmpty) {
+                    return 'description is required.';
+                  }
+                  if (description.trim().length < 3) {
+                    return 'A minimum of 10 letters is required';
+                  }
+                  return null;
+                },
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -109,6 +155,13 @@ class _ProductFormPageState extends State<ProductFormPage> {
                       onFieldSubmitted: (_) {},
                       onSaved: (imageURL) =>
                           _formDate['imageURL'] = imageURL ?? '',
+                      validator: (_imageURL) {
+                        final imageURL = _imageURL ?? '';
+                        if (!isValidImageUrl(imageURL)) {
+                          return 'Provide a valid Url.';
+                        }
+                        return null;
+                      },
                     ),
                   ),
                   Container(
@@ -125,7 +178,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                     )),
                     alignment: Alignment.center,
                     child: _imageUrlControler.text.isEmpty
-                        ? Text('Put the URL')
+                        ? const Text('Put the URL')
                         : FittedBox(
                             child: Image.network(_imageUrlControler.text),
                             fit: BoxFit.cover,

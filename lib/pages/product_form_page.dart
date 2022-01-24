@@ -160,7 +160,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                     return 'description is required.';
                   }
                   if (description.trim().length < 3) {
-                    return 'A minimum of 10 letters is required';
+                    return 'A minimum of 10 letters is required.';
                   }
                   return null;
                 },

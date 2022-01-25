@@ -16,7 +16,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
   final _priceFocus = FocusNode();
   final _descriptionFocus = FocusNode();
   final _imageUrlFocus = FocusNode();
-  final _imageUrlControler = TextEditingController();
+  final _imageUrlController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final _formData = <String, Object>{};
 
@@ -40,7 +40,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
         _formData['description'] = product.description;
         _formData['imageUrl'] = product.imageUrl;
 
-        _imageUrlControler.text = product.imageUrl;
+        _imageUrlController.text = product.imageUrl;
       }
     }
   }
@@ -170,17 +170,17 @@ class _ProductFormPageState extends State<ProductFormPage> {
                 children: [
                   Expanded(
                     child: TextFormField(
-                      decoration: const InputDecoration(labelText: 'Image URL'),
+                      decoration: InputDecoration(labelText: 'Image URL'),
                       keyboardType: TextInputType.url,
                       textInputAction: TextInputAction.done,
                       focusNode: _imageUrlFocus,
-                      controller: _imageUrlControler,
-                      onFieldSubmitted: (_) {},
-                      onSaved: (imageURL) =>
-                          _formData['imageURL'] = imageURL ?? '',
-                      validator: (_imageURL) {
-                        final imageURL = _imageURL ?? '';
-                        if (!isValidImageUrl(imageURL)) {
+                      controller: _imageUrlController,
+                      onFieldSubmitted: (_) => _submitForm(),
+                      onSaved: (imageUrl) =>
+                          _formData['imageUrl'] = imageUrl ?? '',
+                      validator: (_imageUrl) {
+                        final imageUrl = _imageUrl ?? '';
+                        if (!isValidImageUrl(imageUrl)) {
                           return 'Provide a valid Url.';
                         }
                         return null;
@@ -200,12 +200,9 @@ class _ProductFormPageState extends State<ProductFormPage> {
                       width: 1,
                     )),
                     alignment: Alignment.center,
-                    child: _imageUrlControler.text.isEmpty
+                    child: _imageUrlController.text.isEmpty
                         ? const Text('Put the URL')
-                        : FittedBox(
-                            child: Image.network(_imageUrlControler.text),
-                            fit: BoxFit.cover,
-                          ),
+                        : Image.network(_imageUrlController.text),
                   )
                 ],
               ),

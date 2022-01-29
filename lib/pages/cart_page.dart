@@ -83,7 +83,7 @@ class _CartButtonState extends State<CartButton> {
     return _isLoading
         ? const CircularProgressIndicator()
         : TextButton(
-            child: const Text('BUYy'),
+            child: const Text('BUY'),
             style: TextButton.styleFrom(
               textStyle: TextStyle(
                 color: Theme.of(context).colorScheme.primary,

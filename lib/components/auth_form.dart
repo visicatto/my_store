@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop/exceptions/auth_exception.dart';
 import 'package:shop/models/auth.dart';
 
 // ignore: constant_identifier_names
@@ -35,6 +36,22 @@ class _AuthFormState extends State<AuthForm> {
     });
   }
 
+  void _showErrorDialog(String msg) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Error'),
+        content: Text(msg),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Close'),
+          ),
+        ],
+      ),
+    );
+  }
+
   Future<void> _submit() async {
     final isValid = _formKey.currentState?.validate() ?? false;
     if (!isValid) {
@@ -44,16 +61,22 @@ class _AuthFormState extends State<AuthForm> {
     _formKey.currentState?.save();
     Auth auth = Provider.of(context, listen: false);
 
-    if (_isLogin()) {
-      auth.login(
-        _authData['email']!,
-        _authData['password']!,
-      );
-    } else {
-      await auth.signup(
-        _authData['email']!,
-        _authData['password']!,
-      );
+    try {
+      if (_isLogin()) {
+        auth.login(
+          _authData['email']!,
+          _authData['password']!,
+        );
+      } else {
+        await auth.signup(
+          _authData['email']!,
+          _authData['password']!,
+        );
+      }
+    } on AuthException catch (error) {
+      _showErrorDialog(error.toString());
+    } catch (error) {
+      _showErrorDialog('Has occurred unknown.');
     }
 
     setState(() => _isLoading = false);

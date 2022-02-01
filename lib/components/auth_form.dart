@@ -26,7 +26,7 @@ class _AuthFormState extends State<AuthForm> {
   bool _isLogin() => _authMode == AuthMode.Login;
   bool _isSignup() => _authMode == AuthMode.Signup;
 
-  void _swithAuthMode() {
+  void _switchAuthMode() {
     setState(() {
       if (_isLogin()) {
         _authMode = AuthMode.Signup;
@@ -39,9 +39,12 @@ class _AuthFormState extends State<AuthForm> {
   void _showErrorDialog(String msg) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (ctx) => AlertDialog(
         title: const Text('Error'),
-        content: Text(msg),
+        content: Text(
+          msg,
+          style: const TextStyle(color: Colors.black),
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
@@ -54,16 +57,19 @@ class _AuthFormState extends State<AuthForm> {
 
   Future<void> _submit() async {
     final isValid = _formKey.currentState?.validate() ?? false;
+
     if (!isValid) {
       return;
     }
+
     setState(() => _isLoading = true);
+
     _formKey.currentState?.save();
     Auth auth = Provider.of(context, listen: false);
 
     try {
       if (_isLogin()) {
-        auth.login(
+        await auth.login(
           _authData['email']!,
           _authData['password']!,
         );
@@ -158,7 +164,7 @@ class _AuthFormState extends State<AuthForm> {
                 ),
               const Spacer(),
               TextButton(
-                  onPressed: _swithAuthMode,
+                  onPressed: _switchAuthMode,
                   child: Text(_isLogin() ? 'Create your Account' : 'Sing in'))
             ],
           ),

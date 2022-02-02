@@ -9,6 +9,7 @@ import 'package:shop/utils/constants.dart';
 class ProductList with ChangeNotifier {
   final String _token;
   final String _userId;
+  // ignore: prefer_final_fields
   List<Product> _items = [];
 
   List<Product> get items => [..._items];

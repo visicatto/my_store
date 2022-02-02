@@ -8,6 +8,7 @@ import 'package:shop/pages/orders_page.dart';
 import 'package:shop/pages/product_detail_page.dart';
 import 'package:shop/pages/products_page.dart';
 import 'package:shop/utils/app_routes.dart';
+import 'package:shop/utils/custom_route.dart';
 import 'models/auth.dart';
 import 'models/cart.dart';
 import './pages/product_form_page.dart';
@@ -55,10 +56,13 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blueGrey,
-          primaryColor: Colors.deepOrange,
-          fontFamily: 'Lato',
-        ),
+            primarySwatch: Colors.blueGrey,
+            primaryColor: Colors.deepOrange,
+            fontFamily: 'Lato',
+            pageTransitionsTheme: PageTransitionsTheme(builders: {
+              TargetPlatform.iOS: CustomPageTransitionsBuilder(),
+              TargetPlatform.android: CustomPageTransitionsBuilder(),
+            })),
         //home: const ProductsOverviewPage(),
         routes: {
           AppRoutes.AUTH_OR_HOME: (context) => const AuthOrHomePage(),

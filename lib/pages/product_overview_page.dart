@@ -1,4 +1,4 @@
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, unused_field
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

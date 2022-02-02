@@ -37,7 +37,7 @@ class _AuthFormState extends State<AuthForm>
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(
-        milliseconds: 250,
+        milliseconds: 200,
       ),
     );
 
@@ -47,11 +47,11 @@ class _AuthFormState extends State<AuthForm>
     ).animate(
       CurvedAnimation(
         parent: _controller!,
-        curve: Curves.linear,
+        curve: Curves.slowMiddle,
       ),
     );
     _slideAnimation = Tween<Offset>(
-      begin: const Offset(0, -1.5),
+      begin: const Offset(0, -1),
       end: const Offset(0, 0),
     ).animate(
       CurvedAnimation(
@@ -140,10 +140,10 @@ class _AuthFormState extends State<AuthForm>
         borderRadius: BorderRadius.circular(10),
       ),
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 250),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.easeIn,
         padding: const EdgeInsets.all(16),
-        height: _isLogin() ? 310 : 400,
+        height: _isLogin() ? 350 : 450,
         //height: _heightAnimation?.value.height ?? (_isLogin() ? 310 : 400),
         width: deviceSize.width * 0.75,
         child: Form(

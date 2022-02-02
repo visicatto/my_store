@@ -3,7 +3,7 @@
 A marketplace style app, where you can add products using web images(png, jpeg, jpg), edits and delete them, you can also mark them as favorites by user. 
 Used authentication system with firebase integration and some screen animations.
 
-<div align="center">
+<div align="right">
 <img src="https://user-images.githubusercontent.com/96183053/152191247-ab3379eb-7b97-49b0-be42-4fd5d8268bb8.png" width="300px" />
 </div>
 

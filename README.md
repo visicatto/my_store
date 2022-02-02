@@ -4,7 +4,7 @@ A marketplace style app, where you can add products using web images(png, jpeg, 
 Used authentication system with firebase integration and some screen animations.
 
 <div align="center">
-<img src="https://user-images.githubusercontent.com/96183053/152191247-ab3379eb-7b97-49b0-be42-4fd5d8268bb8.png" width="500px" />
+<img src="https://user-images.githubusercontent.com/96183053/152191247-ab3379eb-7b97-49b0-be42-4fd5d8268bb8.png" width="300px" />
 </div>
 
 ![Screenshot_1643772334](https://user-images.githubusercontent.com/96183053/152191247-ab3379eb-7b97-49b0-be42-4fd5d8268bb8.png)

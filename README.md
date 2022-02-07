@@ -5,6 +5,9 @@ Used authentication system with firebase integration and some screen animations.
 Some screenshots of the app running: 
 
 <div align="left">
+  
+  
+  <img src="https://user-images.githubusercontent.com/96183053/152710706-c5dd6e91-57b2-4f8f-844f-b6d340b45f76.gif" width="300px" />
 <img src="https://user-images.githubusercontent.com/96183053/152191247-ab3379eb-7b97-49b0-be42-4fd5d8268bb8.png" width="300px" />
 <img src="https://user-images.githubusercontent.com/96183053/152199935-501417aa-be20-4727-a223-2c561466dfec.png" width="300px" />
 <img src="https://user-images.githubusercontent.com/96183053/152193003-73ef6204-1341-43ea-9ecc-7ba486da2846.png" width="300px" />

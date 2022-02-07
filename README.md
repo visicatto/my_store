@@ -2,7 +2,7 @@ An application developed using Flutter during the class, marketplace style app, 
 Used authentication system with firebase integration and some screen animations.
 I made this video as an explanation of the app running: 
 
-<div align="left">   
+<div align="center">   
 <img src="https://user-images.githubusercontent.com/96183053/152710706-c5dd6e91-57b2-4f8f-844f-b6d340b45f76.gif" width="300px" />
 </div>
 
